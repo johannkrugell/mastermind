@@ -3,4 +3,4 @@
 require './lib/game'
 
 Game.title
-
+Game.want_to_play?
