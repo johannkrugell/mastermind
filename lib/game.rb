@@ -30,5 +30,14 @@ class Game
   def self.play_game?(response)
     puts 'Goodbye' if response == 'n'
     @game = Game.new(0)
+    @game.create_player
+  end
+
+  def create_player
+    @player1 = Player.new('Player1', 'breaker')
+    @player1.player_details
+    @player2 = Player.new('Computer', 'coder')
+    p @player1
+    p @player2
   end
 end
