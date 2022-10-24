@@ -15,3 +15,10 @@ Game.want_to_play?
 # Set code
 @code = Code.new(0)
 @code.code
+
+# play a round
+round = %w[1 2 3]
+round.each do |round_number|
+  @game.round = round_number
+  p @game.round
+end

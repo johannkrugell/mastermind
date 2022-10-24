@@ -2,6 +2,8 @@
 
 # create Game object
 class Game
+  attr_accessor :round
+
   def initialize(round)
     @round = round
   end
