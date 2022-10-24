@@ -10,6 +10,12 @@ class Player
   end
 
   def player_details
+    player_detail_update
+  end
+
+  private
+
+  def player_detail_update
     puts 'Player 1 please enter your name'
     response = gets.chomp
     @name = correct_case(response)
