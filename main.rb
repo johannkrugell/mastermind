@@ -3,6 +3,7 @@
 require './lib/game'
 require './lib/player'
 require './lib/code'
+require './lib/guess'
 
 # Start game. Does player want to play?
 Game.title
@@ -17,8 +18,4 @@ Game.want_to_play?
 @code.code
 
 # play a round
-round = %w[1 2 3]
-round.each do |round_number|
-  @game.round = round_number
-  p @game.round
-end
+@game.play_round(@game, @code)
