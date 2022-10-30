@@ -19,7 +19,7 @@ class Code
   private
 
   def random_colors
-    colors
-    @colors.values.to_a.sample(4)
+    color_keys = colors.transform_keys(&:to_s)
+    @code = color_keys.keys.sample(4)
   end
 end

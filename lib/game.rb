@@ -11,7 +11,7 @@ class Game
     @round = round
   end
 
-  def self.title
+  def title
     puts "
     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
     ██ ▄▀▄ █ ▄▄▀█ ▄▄█▄ ▄█ ▄▄█ ▄▄▀████ ▄▀▄ ██▄██ ▄▄▀█ ▄▀
@@ -21,7 +21,7 @@ class Game
     "
   end
 
-  def self.want_to_play?
+  def want_to_play?
     puts "Do you want to play Master Mind ? (\e[32m y \e[0m/\e[31m n \e[0m)"
     valid_response = %w[y n]
     response = gets.chomp.downcase
@@ -32,7 +32,7 @@ class Game
     play_game?(response)
   end
 
-  def self.play_game?(response)
+  def play_game?(response)
     abort 'Goodbye' if response == 'n'
   end
 
@@ -44,22 +44,30 @@ class Game
 
   def play_round(game, code)
     @guesses = {}
-    round = %w[1 2]
-    puts "#{@player1.name} please select any four colors"
-    display_colors
+    round = %w[1 2 3 4 5]
+    display_round
     round.each do |round_number|
       game.round = round_number
       @guesses[:"guess#{round_number}"] = Guess.new(0)
       @guesses[:"guess#{round_number}"].breaker_guess
+      @guesses[:"guess#{round_number}"].breaker_feedback(code.code)
       update_terminal
     end
   end
 
   def update_terminal
     puts "\e[H\e[2J"
-    Game.title
+    title
+    display_round
     @guesses.each do |key, _value|
-      puts "Guess #{key.slice(5)}: #{@guesses[key].instance_variable_get(:@display).join(' ')}"
+      puts "Guess    #{key.slice(5)}: #{@guesses[key].instance_variable_get(:@display)}"
+      puts "Feedback #{key.slice(5)}: #{@guesses[key].instance_variable_get(:@display_feedback)}"
+      puts ''
     end
+  end
+
+  def display_round
+    puts "#{@player1.name} please select any four colors"
+    display_colors(colors)
   end
 end

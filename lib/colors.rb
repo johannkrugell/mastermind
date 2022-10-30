@@ -3,24 +3,34 @@
 # module to store the colors to select and return
 module Colors
   def colors
-    @colors = { "1": '🔴', "2": '🔵', "3": '🟡', "4": '🟠', "5": '🟢', "6": '🟣' }
+    { "1": '🟥', "2": '🟦', "3": '🟨', "4": '🟧', "5": '🟩', "6": '🟪' }
   end
 
-  def display_colors
-    colors_to_string
+  def feedback_colors
+    { "1": '⬛', "2": '⬜', "3": '❌' }
+  end
+
+  def display_colors(color_range)
+    colors_to_string(color_range)
   end
 
   private
 
-  def colors_to_string
+  def colors_to_string(color_range)
     options = []
-    colors.each { |option, color| options << "#{option} - #{color}" }
+    color_range.each { |option, color| options << "#{color}(#{option}) " }
     puts options.join(' ').to_s
   end
 
   def display_guess(guess)
-    @display = []
-    guess.each { |selection| @display << colors[:"#{selection}"] }
-    @display.join(' ')
+    display = []
+    guess.each { |selection| display << colors[:"#{selection}"] }
+    @display = display.join(' ').to_s
+  end
+
+  def display_feedback(feedback)
+    display_feedback = []
+    feedback.each { |selection| display_feedback << feedback_colors[:"#{selection}"] }
+    @display_feedback = display_feedback.join(' ').to_s
   end
 end

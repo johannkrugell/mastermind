@@ -30,4 +30,17 @@ class Guess
   def validate_selection(guess)
     guess.all? { |number| number.to_i.positive? && number.to_i <= 6 }
   end
+
+  def breaker_feedback(code)
+    @match_color_and_position = []
+    @guess.to_a.each_with_index do |number, index|
+      @match_color_and_position <<
+        if guess[index] == code[index]
+          '1'
+        else
+          code.any?(number) ? '2' : '3'
+        end
+    end
+    display_feedback(@match_color_and_position)
+  end
 end
