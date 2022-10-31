@@ -11,11 +11,11 @@ require './lib/guess'
 @game.want_to_play?
 
 # Create new player object
-@game.create_player
+@game.new_players
 
 # Set code
 @code = Code.new(0)
 @code.select_code
 
 # play a round
-@game.play_round(@game, @code)
+@game.start_game(@code)

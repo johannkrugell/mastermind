@@ -5,7 +5,6 @@ require './lib/colors'
 # class creates the code that needs to be broken object
 class Code
   include Colors
-
   attr_accessor :code
 
   def initialize(code)

@@ -10,20 +10,20 @@ class Player
   end
 
   def player_details
-    player_detail_update
+    update_player_detail
   end
 
   private
 
-  def player_detail_update
+  def update_player_detail
     puts 'Player 1 please enter your name'
-    response = gets.chomp
-    @name = correct_case(response)
+    player_name = gets.chomp
+    @name = correct_case(player_name)
     @type = 'breaker'
   end
 
-  def correct_case(response)
-    array = response.downcase.split('')
+  def correct_case(string)
+    array = string.downcase.split('')
     array[0].upcase.to_s + array[1..array.length].join.to_s
   end
 end
