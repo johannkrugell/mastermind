@@ -42,20 +42,20 @@ class Game
     @player2 = Player.new('Computer', 'coder')
   end
 
-  def play_round(game, code)
+  def play_round(code)
     @guesses = {}
     round = %w[1 2 3 4 5]
     display_round
     round.each do |round_number|
-      game.round = round_number
       @guesses[:"guess#{round_number}"] = Guess.new(0)
       @guesses[:"guess#{round_number}"].breaker_guess
       @guesses[:"guess#{round_number}"].breaker_feedback(code.code)
-      update_terminal
+      update_terminal(round_number)
+      check_winner(round_number) ? break : next
     end
   end
 
-  def update_terminal
+  def update_terminal(round)
     puts "\e[H\e[2J"
     title
     display_round
@@ -64,10 +64,16 @@ class Game
       puts "Feedback #{key.slice(5)}: #{@guesses[key].instance_variable_get(:@display_feedback)}"
       puts ''
     end
+    puts check_winner(round) ? 'You won!' : 'Please try again'
   end
 
   def display_round
     puts "#{@player1.name} please select any four colors"
     display_colors(colors)
+  end
+
+  def check_winner(round)
+    feedback = @guesses[:"guess#{round}"].instance_variable_get(:@match_color_and_position)
+    feedback.all?('1')
   end
 end
