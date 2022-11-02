@@ -17,7 +17,7 @@ module Display
     guess.each { |selection| display << colors[:"#{selection}"] }
     @display = display.join(' ').to_s
   end
-  
+
   def display_round
     puts "#{@player1.name} please select any four colors"
     display_colors(colors)
