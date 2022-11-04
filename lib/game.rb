@@ -9,10 +9,12 @@ class Game
   include Colors
   include Display
   include Validate
-  attr_accessor :round
+  attr_accessor :round, :player1, :player2
 
-  def initialize(round)
+  def initialize(round, player1, player2)
     @round = round
+    @player1 = player1
+    @player2 = player2
   end
 
   def title
@@ -45,10 +47,10 @@ class Game
   end
 
   def create_player
-    @player1 = Player.new('Player1', 'breaker')
-    @player1.player_details
+    self.player1 = Player.new('Player1', 'breaker')
+    player1.player_details
     computer_type = @player1.type == 'coder' ? 'breaker' : 'coder'
-    @player2 = Player.new('Computer', computer_type)
+    self.player2 = Player.new('Computer', computer_type)
   end
 
   def play_game?(response)
@@ -68,7 +70,7 @@ class Game
     display_round
     round.each do |round_number|
       @guesses[:"guess#{round_number}"] = Guess.new(0)
-      @guesses[:"guess#{round_number}"].breaker_guess
+      @guesses[:"guess#{round_number}"].breaker_guess(player1.type)
       @guesses[:"guess#{round_number}"].breaker_feedback(code.code)
       update_terminal(round_number)
       check_winner(round_number) ? break : next

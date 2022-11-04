@@ -6,7 +6,7 @@ require './lib/code'
 require './lib/guess'
 
 # Start game. Does player want to play?
-@game = Game.new(0)
+@game = Game.new(0, 0, 0)
 @game.title
 @game.want_to_play?
 
@@ -15,7 +15,7 @@ require './lib/guess'
 
 # Set code
 @code = Code.new(0)
-@code.select_code
+@code.select_code(@game.player1)
 
 # play a round
 @game.start_game(@code)

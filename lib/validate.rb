@@ -9,4 +9,8 @@ module Validate
       response = gets.chomp.downcase
     end
   end
+
+  def validate_selection(selection)
+    selection.all? { |number| number.to_i.positive? && number.to_i <= 6 }
+  end
 end

@@ -2,19 +2,21 @@
 
 require './lib/colors'
 require './lib/display'
+require './lib/validate'
 
 # Create guess object the players guess
 class Guess
   include Colors
   include Display
+  include Validate
   attr_accessor :guess
 
   def initialize(guess)
     @guess = guess
   end
 
-  def breaker_guess
-    guess_colors
+  def breaker_guess(player_type)
+    player_type == 'coder' ? computer_guess_colors : player_guess_colors
   end
 
   def breaker_feedback(code)
@@ -27,6 +29,10 @@ class Guess
   end
 
   private
+
+  def computer_guess_colors
+    p 'Computer guess color'
+  end
 
   def compare_guess_to_code(code)
     @match_color_and_position = []
@@ -41,7 +47,7 @@ class Guess
     display_feedback(@match_color_and_position)
   end
 
-  def guess_colors
+  def player_guess_colors
     selection = ''
     selection = gets.chomp until selection.length == 4
     selection_to_array(selection)
@@ -50,9 +56,5 @@ class Guess
   def selection_to_array(selection)
     @guess = selection.split(//)
     validate_selection(@guess) == true ? display_guess(@guess) : invalid_message
-  end
-
-  def validate_selection(guess)
-    guess.all? { |number| number.to_i.positive? && number.to_i <= 6 }
   end
 end
