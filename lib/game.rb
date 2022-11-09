@@ -70,7 +70,7 @@ class Game
     display_round
     round.each do |round_number|
       @guesses[:"guess#{round_number}"] = Guess.new(0)
-      @guesses[:"guess#{round_number}"].breaker_guess(player1.type)
+      @guesses[:"guess#{round_number}"].breaker_guess(player1.type, round_number, @guesses)
       @guesses[:"guess#{round_number}"].breaker_feedback(code.code)
       update_terminal(round_number)
       check_winner(round_number) ? break : next

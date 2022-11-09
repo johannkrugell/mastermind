@@ -24,7 +24,7 @@ module Display
   end
 
   def update_terminal(round)
-    puts "\e[H\e[2J"
+    # puts "\e[H\e[2J"
     title
     display_round
     @guesses.each do |key, _value|

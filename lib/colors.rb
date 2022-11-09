@@ -21,4 +21,10 @@ module Colors
     color_range.each { |option, color| options << "#{color}(#{option}) " }
     puts options.join(' ').to_s
   end
+
+  def colors_to_array(colors)
+    available_colors = []
+    colors.transform_keys(&:to_s).each_key { |key| available_colors << key }
+    available_colors
+  end
 end

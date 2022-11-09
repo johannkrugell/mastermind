@@ -20,14 +20,13 @@ class Code
   private
 
   def computer_set_code
-    color_keys = colors.transform_keys(&:to_s)
-    @code = color_keys.keys.sample(4)
+    @code = colors.transform_keys(&:to_s).keys.sample(4)
   end
 
   def player_set_code(player)
     puts "#{player.name} please set code using colors below"
     display_colors(colors)
-    @code = gets.chomp
-    validate_selection(@code.split(''))
+    @code = gets.chomp.split(//)
+    validate_selection(@code)
   end
 end
