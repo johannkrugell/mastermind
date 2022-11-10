@@ -71,7 +71,6 @@ class Game
     response = gets.chomp.downcase
     validate_response(%w[y n], response)
     play_game?(response, round_number)
-    p round_number
   end
 
   def play_round(code_to_break)
