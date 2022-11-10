@@ -47,8 +47,8 @@ class Guess
   end
 
   def computer_guess_colors(round_number, guesses)
-    if round_number == '1' 
-      computer_random_guess(4, colors_to_array(colors)) 
+    if round_number == '1'
+      computer_random_guess(4, colors_to_array(colors))
     else
       computer_feedback_guess(round_number, guesses)
     end
