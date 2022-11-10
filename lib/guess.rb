@@ -19,8 +19,8 @@ class Guess
     player_type == 'coder' ? computer_guess_colors(round_number, guesses) : player_guess_colors
   end
 
-  def breaker_feedback(code)
-    compare_guess_to_code(code)
+  def breaker_feedback(code_to_break)
+    compare_guess_to_code(code_to_break)
   end
 
   def invalid_message
@@ -46,15 +46,19 @@ class Guess
     available_positions
   end
 
-  def computer_guess_colors(round, guesses)
-    round == '1' ? computer_random_guess(4, colors_to_array(colors)) : computer_feedback_guess(round, guesses)
+  def computer_guess_colors(round_number, guesses)
+    if round_number == '1' 
+      computer_random_guess(4, colors_to_array(colors)) 
+    else
+      computer_feedback_guess(round_number, guesses)
+    end
     display_guess(@guess)
   end
 
-  def computer_feedback_guess(round, guesses)
+  def computer_feedback_guess(round_number, guesses)
     @guess = []
-    prior_feedback(round, guesses)
-    prior_guess(round, guesses)
+    prior_feedback(round_number, guesses)
+    prior_guess(round_number, guesses)
     available_colors = available_colors(colors, @prior_guess)
     available_positions = available_positions(@feedback)
     @feedback.each_with_index do |element, index|

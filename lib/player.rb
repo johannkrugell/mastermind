@@ -28,7 +28,7 @@ class Player
   def update_player_type
     puts "#{@name}, would you like to be the coder or breaker (\e[32m c \e[0m/\e[31m b \e[0m)?"
     player_type = gets.chomp
-    validate_response(%w[c b], player_type)
+    player_type = validate_response(%w[c b], player_type)
     @type = player_type == 'c' ? 'coder' : 'breaker'
   end
 

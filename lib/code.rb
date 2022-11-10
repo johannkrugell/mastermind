@@ -24,9 +24,11 @@ class Code
   end
 
   def player_set_code(player)
-    puts "#{player.name} please set code using colors below"
+    puts "#{player.name} please set code by selecting the color number combinations below"
     display_colors(colors)
-    @code = gets.chomp.split(//)
+    @code = ''
+    @code = gets.chomp until @code.length == 4
+    @code = @code.split(//)
     validate_selection(@code)
   end
 end

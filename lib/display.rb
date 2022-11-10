@@ -23,8 +23,20 @@ module Display
     display_colors(colors)
   end
 
+  def display_winner_message(round_number)
+    if check_winner(round_number) && round_number <= '5'
+      puts @player1.type == 'breaker' ? 'You won!' : 'I won!'
+      player_question(round_number.to_i)
+    elsif !check_winner(round_number) && round_number <= '4'
+      puts 'Please try again'
+    else
+      puts @player1.type == 'breaker' ? 'You loose!' : 'I lost?!'
+      player_question(round_number.to_i)
+    end
+  end
+
   def update_terminal(round)
-    # puts "\e[H\e[2J"
+    puts "\e[H\e[2J"
     title
     display_round
     @guesses.each do |key, _value|
@@ -32,6 +44,6 @@ module Display
       puts "Feedback #{key.slice(5)}: #{@guesses[key].instance_variable_get(:@display_feedback)}"
       puts ''
     end
-    puts check_winner(round) ? 'You won!' : 'Please try again'
+    display_winner_message(round)
   end
 end
